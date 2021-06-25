@@ -1,0 +1,56 @@
+.toDoCard {
+  background: #fbfcff;
+  width: calc(100% - 20px);
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 3px 3px 3px #00000033;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.toDoCard input {
+  background: #ffffff;
+  box-shadow: 2px 2px 2px #00000022;
+  border: none;
+  font-size: 18px;
+  width: 100%;
+  border-radius: 5px;
+  line-height: 23px;
+  padding: 10px;
+  outline: none;
+}
+
+.toDoCard input:disabled {
+  background: transparent;
+  box-shadow: none;
+}
+
+.toDo__completed,
+.toDo__edit,
+.toDo__delete {
+  width: max-content;
+  height: 25px;
+  outline: none;
+  border: none;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 5px;
+  background: #ffffff;
+  margin: 5px 10px 5px 0px;
+}
+
+.toDo__completed {
+  border: 1px solid lightgray;
+}
+
+.toDo__edit {
+  border: 1px solid #0d6efd;
+}
+
+.toDo__delete {
+  border: 1px solid #dc3545;
+}

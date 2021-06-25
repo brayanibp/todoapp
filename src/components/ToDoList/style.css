@@ -1,0 +1,14 @@
+#toDoList {
+  width: 300px;
+  background: #ebecf0;
+  height: 500px;
+  margin: auto;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px #00000033;
+}
+
+#toDoList ul {
+  list-style: none;
+  padding: 5px;
+}

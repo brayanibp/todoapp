@@ -1,0 +1,70 @@
+#newToDoBox {
+  width: 300px;
+  min-height: 30px;
+  max-height: max-content;
+  padding: 15px;
+  margin: 15px auto;
+  background: #ebecf0;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px #00000033;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#newToDoButton {
+  background: transparent;
+  height: 40px;
+  width: 240px;
+  margin: 0 0 10px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 18px;
+  color: #00000088;
+}
+
+#newToDoButton:hover {
+  box-shadow: 1.5px 1.5px 1.5px #00000033;
+  background: #dfe1e6;
+}
+
+#closeButton {
+  background: transparent;
+  height: 40px;
+  width: 40px;
+  margin: 0 5px 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+#closeButton:hover {
+  box-shadow: 1.5px 1.5px 1.5px #00000033;
+  background: #dfe1e6;
+}
+
+#newToDo {
+  border: none;
+  min-height: 30px;
+  max-height: 60px;
+  border-radius: 5px;
+  margin: 0 5px;
+  padding: 10px 15px;
+  resize: none;
+  font-size: 18px;
+  line-height: 23px;
+  box-shadow: 3px 3px 3px #00000033;
+  width: 100%;
+  outline: none;
+}
+
+#newToDo.hidden {
+  display: none;
+}
