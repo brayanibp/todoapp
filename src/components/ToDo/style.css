@@ -1,28 +1,32 @@
 .toDoCard {
   background: #fbfcff;
   width: calc(100% - 20px);
-  height: 50px;
+  min-height: 80px;
+  height: max-content;
   display: flex;
   flex-wrap: wrap;
   box-shadow: 3px 3px 3px #00000033;
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
+  margin: 10px 0;
 }
 
-.toDoCard input {
+.toDoCard textarea {
   background: #ffffff;
   box-shadow: 2px 2px 2px #00000022;
   border: none;
   font-size: 18px;
   width: 100%;
+  height: 43px;
   border-radius: 5px;
   line-height: 23px;
   padding: 10px;
   outline: none;
+  resize: none;
 }
 
-.toDoCard input:disabled {
+.toDoCard textarea:disabled {
   background: transparent;
   box-shadow: none;
 }
@@ -30,27 +34,59 @@
 .toDo__completed,
 .toDo__edit,
 .toDo__delete {
-  width: max-content;
-  height: 25px;
+  width: 32px;
+  height: 32px;
   outline: none;
   border: none;
   padding: 10px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   border-radius: 5px;
-  background: #ffffff;
+  background-color: transparent;
   margin: 5px 10px 5px 0px;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 300ms linear;
+  transition: background-color 300ms linear;
+}
+
+.toDo__completed:hover,
+.toDo__edit:hover,
+.toDo__delete:hover {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 4px #00000033;
 }
 
 .toDo__completed {
-  border: 1px solid lightgray;
+  background-image: url("../../assets/svgs/check.svg");
+}
+
+.checked {
+  background-color: #7ff59f;
+  background-image: url("../../assets/svgs/white-check.svg");
+}
+
+.checked:hover {
+  background-color: #3f3f3f;
+  background-image: url("../../assets/svgs/white-check.svg");
 }
 
 .toDo__edit {
-  border: 1px solid #0d6efd;
+  background-image: url("../../assets/svgs/edit.svg");
 }
 
 .toDo__delete {
-  border: 1px solid #dc3545;
+  background-image: url("../../assets/svgs/delete.svg");
+}
+
+.toDoCard .toDo__date {
+  height: 32px;
+  width: min-content;
+  padding: 0;
+  font-size: 10px;
+  border: none;
+  margin: 5px 10px 5px 0;
+  outline: none;
+  background: transparent;
 }

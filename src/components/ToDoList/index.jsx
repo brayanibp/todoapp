@@ -6,11 +6,11 @@ import { fetchToDo } from '../../actions/toDoActions';
 import Loader from '../Loader';
 
 const ToDoList = (props) => {
-
   useEffect(() => {
-    props.fetchToDo();
-    console.log(props.list);
-  });
+    if (!props.list.length) {
+      props.fetchToDo();
+    }
+  }, [props]);
   return (
     <div id="toDoList">
       {
@@ -28,7 +28,7 @@ const ToDoList = (props) => {
                     />
                   </li>
                 )
-              })
+              }).reverse()
             }
           </ul>
           :

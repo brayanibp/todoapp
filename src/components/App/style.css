@@ -7,3 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-decoration: none;
 }
+
+.header {
+  margin: 20px;
+}

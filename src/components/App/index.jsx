@@ -6,8 +6,10 @@ import AddToDo from '../AddToDo';
 const App = (props) => {
   return (
     <>
-      <h1>This is my ToDo App</h1>
-      <h2>Add a ToDo</h2>
+      <div className="header">
+        <h1>This is my ToDo App</h1>
+        <h2>Add a ToDo</h2>
+      </div>
       <AddToDo />
       <ToDoList />
     </>
