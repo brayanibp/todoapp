@@ -54,7 +54,16 @@ const ToDo = (props) => {
     target.classList.toggle("checked");
   }
   const handleDatePick = (ev) => {
-    console.log(ev);
+    const datepicker = ev.target;
+    const datepickerDate = new Date(String(ev.target.value).replace('-', '/')).getTime()
+    const currentDate = new Date();
+    if (datepickerDate < currentDate) {
+      datepicker.classList.remove('ontime');
+      datepicker.classList.add('expired');
+    } else {
+      datepicker.classList.remove('expired');
+      datepicker.classList.add('ontime');
+    }
   }
   return (
     <div

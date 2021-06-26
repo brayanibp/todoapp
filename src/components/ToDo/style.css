@@ -90,3 +90,11 @@
   outline: none;
   background: transparent;
 }
+
+.toDoCard .toDo__date.ontime {
+  color: green;
+}
+
+.toDoCard .toDo__date.expired {
+  color: red;
+}
