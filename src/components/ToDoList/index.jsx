@@ -17,7 +17,7 @@ const ToDoList = (props) => {
         !props.loading ?
           <ul>
             {
-              props.list.map(toDo => {
+              props.filteredList.map(toDo => {
                 return (
                   <li key={toDo.id}>
                     <ToDo

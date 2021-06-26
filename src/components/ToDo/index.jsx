@@ -4,10 +4,27 @@ import { connect } from 'react-redux';
 import * as toDoActions from '../../actions/toDoActions';
 
 const ToDo = (props) => {
+  //UPDATE TO DO
+  const updateToDo = () => {
+    const toDoName = document.querySelector(`#toDo_${props.id}`);
+    const toDoCheck = document.querySelector(`#toDoCheck_${props.id}`);
+    const toDoExpire = document.querySelector(`#toDoDate_${props.id}`);
+    const toDo = {
+      id: props.id,
+      name: toDoName.value,
+      completed: toDoCheck.checked,
+      expire_at: toDoExpire.value
+    }
+    props.updateToDo(toDo);
+  }
+
+  //ACTIVE AND DISABLE TEXTAREA FIELD
   const OpenAndClose = () => {
     const toDo = document.querySelector(`#toDo_${props.id}`);
     toDo.disabled = !toDo.disabled;
   }
+
+  //DETECTING IF ESC KEY OR ENTER KEY WAS PRESSED
   const handleKeyPress = (ev) => {
     const toDoName = document.querySelector(`#toDo_${props.id}`);
     if (ev.keyCode === 27) {
@@ -16,16 +33,11 @@ const ToDo = (props) => {
       OpenAndClose();
     } else if (ev.keyCode === 13) {
       OpenAndClose();
-      const toDo = {
-        id: props.id,
-        name: toDoName.value,
-        completed: document.querySelector(`#toDoCheck_${props.id}`).checked,
-        expire_at: null
-      }
-      props.updateToDo(toDo);
+      updateToDo();
     }
   }
 
+  //RESIZING TEXTAREA FIELDS ON LOAD
   const loadAreaSize = () => {
     const textarea_nodelist = document.querySelectorAll('textarea');
     const textareas = Array.prototype.slice.call(textarea_nodelist);
@@ -35,24 +47,33 @@ const ToDo = (props) => {
     });
   }
 
+  //RESIZING TEXTAREA FIELD ON TYPING
   const handleHeightResize = (ev) => {
     const el = ev.target;
     el.style.height = "5px";
     el.style.height = (el.scrollHeight) + "px";
   }
 
+  //EDIT BUTTON PRESSED
   const HandleEdit = () => {
     OpenAndClose();
   }
+
+  //DELETE BUTTON PRESSED
   const deleteToDo = () => {
     props.deleteToDo(props.id);
   }
+
+  //CHECK BUTTON PRESSED
   const handleCheck = (ev) => {
     const checkbox = document.querySelector(`#toDoCheck_${props.id}`);
     const target = document.querySelector(`#toDoCheckButton_${props.id}`);
     checkbox.checked = !checkbox.checked;
     target.classList.toggle("checked");
+    updateToDo();
   }
+
+  //DATEPICKED DATA CHANGED
   const handleDatePick = (ev) => {
     const datepicker = ev.target;
     const datepickerDate = new Date(String(ev.target.value).replace('-', '/')).getTime()
@@ -64,7 +85,9 @@ const ToDo = (props) => {
       datepicker.classList.remove('expired');
       datepicker.classList.add('ontime');
     }
+    updateToDo();
   }
+
   return (
     <div
       id={props.id}
@@ -79,20 +102,21 @@ const ToDo = (props) => {
         disabled
       />
       <input
+        type="date"
+        id={`toDoDate_${props.id}`}
+        className="toDo__date"
+        defaultValue={props.expire_at}
+        onChange={handleDatePick}
+      />
+      <input
         type="checkbox"
         hidden
         id={`toDoCheck_${props.id}`}
         defaultChecked={props.completed}
       />
-      <input
-        type="date"
-        className="toDo__date"
-        defaultValue={props.expire_at}
-        onChange={handleDatePick}
-      />
       <button
         id={`toDoCheckButton_${props.id}`}
-        className="toDo__completed"
+        className={props.completed ? "toDo__completed checked" : "toDo__completed"}
         onClick={handleCheck}
       ></button>
       <button
