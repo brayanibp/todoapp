@@ -9,13 +9,15 @@ const ToDoFilter = (props) => {
   }
   return (
     <>
-      <div id="toDoSearch">
-        <input type="text" onChange={filterByName} />
-      </div>
-      <div id="filterOptions">
-        <button onClick={() => props.filterAllToDos()}>All</button>
-        <button onClick={() => props.filterCompletedToDos()}>Completed</button>
-        <button onClick={() => props.filterUncompletedToDos()}>Uncompleted</button>
+      <div id="filtersBox">
+        <div id="toDoSearch">
+          <input type="text" onChange={filterByName} placeholder="Search Something..." />
+        </div>
+        <div id="filterOptions">
+          <button onClick={() => props.filterAllToDos()}>All</button>
+          <button onClick={() => props.filterCompletedToDos()}>Completed</button>
+          <button onClick={() => props.filterUncompletedToDos()}>Uncompleted</button>
+        </div>
       </div>
     </>
   );

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import ToDo from '../ToDo';
 import './style.css';
-import { fetchToDo } from '../../actions/toDoActions';
+import { fetchToDo, filterAllToDos } from '../../actions/toDoActions';
 import Loader from '../Loader';
 
 const ToDoList = (props) => {
@@ -41,7 +41,8 @@ const ToDoList = (props) => {
 const mapStateToProps = (reducers) => (reducers.toDosProps)
 
 const mapDispatchToProps = {
-  fetchToDo
+  fetchToDo,
+  filterAllToDos
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToDoList);

@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import plusIcon from '../../assets/svgs/plus-lg.svg';
 import closeIcon from '../../assets/svgs/close.svg';
-import { addToDo } from '../../actions/toDoActions';
+import { addToDo, filterAllToDos } from '../../actions/toDoActions';
 import { connect } from 'react-redux';
 
 const AddToDo = (props) => {
@@ -20,7 +20,7 @@ const AddToDo = (props) => {
       Close();
     } else if (ev.keyCode === 13 && toDo.value.length > 0) {
       props.addToDo(toDo.value);
-      toDo.value = "";
+      props.filterAllToDos();
       Close();
     }
   }
@@ -47,7 +47,8 @@ const AddToDo = (props) => {
 const mapStateToProps = (reducers) => (reducers.toDosProps)
 
 const mapDispatchToProps = {
-  addToDo
+  addToDo,
+  filterAllToDos
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddToDo);

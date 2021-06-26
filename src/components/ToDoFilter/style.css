@@ -1,0 +1,37 @@
+#filtersBox {
+  background: #ebecf0;
+  width: 300px;
+  margin: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px #00000033;
+}
+
+#toDoSearch input {
+  width: 240px;
+  height: 32px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  box-shadow: 3px 3px 3px #00000033;
+  font-size: 18px;
+  padding: 3px 40px 3px 10px;
+  margin: 5px 0 10px 0;
+  background-image: url("../../assets/svgs/search.svg");
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+}
+
+#filtersBox button {
+  width: max-content;
+  height: 32px;
+  background: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  box-shadow: 2px 2px 2px #00000022;
+  margin: 5px 5px 0 5px;
+  font-size: 16px;
+  font-weight: lighter;
+  color: #777;
+}

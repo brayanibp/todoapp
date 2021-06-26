@@ -62,6 +62,7 @@ const ToDo = (props) => {
   //DELETE BUTTON PRESSED
   const deleteToDo = () => {
     props.deleteToDo(props.id);
+    props.filterAllToDos();
   }
 
   //CHECK BUTTON PRESSED
