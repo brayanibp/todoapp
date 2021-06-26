@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import ToDo from '../ToDo';
 import './style.css';
 import { fetchToDo } from '../../actions/toDoActions';
+import Loader from '../Loader';
 
 const ToDoList = (props) => {
 
@@ -12,22 +13,27 @@ const ToDoList = (props) => {
   });
   return (
     <div id="toDoList">
-      <ul>
-        {
-          !props.loading && props.list.map(toDo => {
-            return (
-              <li key={toDo.id}>
-                <ToDo
-                  id={toDo.id}
-                  name={toDo.name}
-                  expire_at={toDo.expire_at}
-                  completed={toDo.completed}
-                />
-              </li>
-            )
-          })
-        }
-      </ul>
+      {
+        !props.loading ?
+          <ul>
+            {
+              props.list.map(toDo => {
+                return (
+                  <li key={toDo.id}>
+                    <ToDo
+                      id={toDo.id}
+                      name={toDo.name}
+                      expire_at={toDo.expire_at}
+                      completed={toDo.completed}
+                    />
+                  </li>
+                )
+              })
+            }
+          </ul>
+          :
+          <Loader />
+      }
     </div>
   );
 }

@@ -6,6 +6,9 @@
   padding: 15px;
   border-radius: 10px;
   box-shadow: 3px 3px 3px #00000033;
+  display: flex;
+  justify-content: center;
+  align-items: initial;
 }
 
 #toDoList ul {
