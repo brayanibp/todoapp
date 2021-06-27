@@ -11,6 +11,9 @@ body {
 body {
   background: url("../../assets/jpg/background.jpg");
   background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .header {

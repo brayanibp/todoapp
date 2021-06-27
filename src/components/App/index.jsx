@@ -9,8 +9,8 @@ const App = (props) => {
   return (
     <>
       <div className="header">
-        <h1>This is my ToDo App</h1>
-        <h2>Add a ToDo</h2>
+        <h1>This is my To Do App</h1>
+        <h2>Add a To Do</h2>
       </div>
       <div id="AppContainer">
         <div>

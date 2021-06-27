@@ -5,8 +5,10 @@ const initialState = {
   filteredList: [],
   loading: true,
   currentPage: 0,
-  nextPage: 1,
-  lastPage: 1
+  nextPage: "",
+  lastPage: 1,
+  activeFilter: "all",
+  lastFilter: ""
 }
 
 const toDoReducer = (state = initialState, action) => {
@@ -17,50 +19,63 @@ const toDoReducer = (state = initialState, action) => {
         loading: true
       }
     case FETCH_TODOS:
-      if (state.currentPage === state.lastPage) {
-        return {
-          ...state,
-          loading: false
-        }
-      }
+      //FILTERING NEW TO DOS
+      const newList = action.payload.list.filter(toDo=> ![...state.list].find(prev=>parseInt(prev.id)===parseInt(toDo.id)));
       return {
         ...state,
         list: [
           ...state.list,
-          ...action.payload.list
+          ...newList
         ],
         filteredList: [
-          ...state.list,
-          ...action.payload.list
+          ...newList
         ],
-        currentPage: state.nextPage,
-        nextPage: state.nextPage + 1,
+        currentPage: action.payload.currentPage,
+        nextPage: action.payload.nextPage,
         lastPage: action.payload.lastPage,
-        loading: false
+        loading: false,
+        activeFilter: action.payload.activeFilter,
+        lastFilter: state.activeFilter
       }
 
     case FILTER_ALL_TODOS:
       return {
         ...state,
-        filteredList: [...state.list]
+        filteredList: [...state.list],
+        activeFilter: "all",
+        nextPage: "",
       }
 
     case FILTER_COMPLETED_TODOS:
       return {
         ...state,
-        filteredList: state.list.filter(toDo => Boolean(toDo.completed) === true)
+        filteredList: state.list.filter(toDo => Boolean(toDo.completed) === true),
+        activeFilter: "completed",
+        nextPage: ""
       }
 
     case FILTER_UNCOMPLETED_TODOS:
       return {
         ...state,
-        filteredList: state.list.filter(toDo => Boolean(toDo.completed) === false)
+        filteredList: state.list.filter(toDo => Boolean(toDo.completed) === false),
+        activeFilter: "uncompleted",
+        nextPage: ""
       }
 
     case FILTER_TODO_NAME:
+      if (action.payload.length < 1) {
+        return {
+          ...state,
+          filteredList: [...state.list],
+          activeFilter: "name",
+          nextPage: ""
+        }
+      }
       return {
         ...state,
-        filteredList: state.list.filter(toDo => String(toDo.name).toLowerCase().includes(String(action.payload).toLowerCase()))
+        filteredList: state.list.filter(toDo => String(toDo.name).toLowerCase().includes(String(action.payload).toLowerCase())),
+        activeFilter: "name",
+        nextPage: ""
       }
 
     case ADD_TODO:

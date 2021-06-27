@@ -2,26 +2,29 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import ToDo from '../ToDo';
 import './style.css';
-import { fetchToDo, filterAllToDos } from '../../actions/toDoActions';
+import { fetchToDo } from '../../actions/toDoActions';
 import Loader from '../Loader';
+import NothingFound from '../NothingFound';
 
 const ToDoList = (props) => {
-  const { list, nextPage, fetchToDo } = props;
+  const { list, nextPage, fetchToDo, activeFilter, lastFilter, filteredList } = props;
   useEffect(() => {
     if (list.length < 1) {
-      fetchToDo(nextPage);
+      fetchToDo(activeFilter, lastFilter, nextPage);
+    } else if (filteredList.length < 1 && nextPage !== null) {
+      fetchToDo(activeFilter, lastFilter, nextPage);
     }
-  }, [list, fetchToDo, nextPage]);
+  }, [list, fetchToDo, nextPage, activeFilter, lastFilter, filteredList]);
   return (
     <>
       <div id="toDoList">
-        <h2>To Do List</h2>
+        <h2>To Do List: {activeFilter}</h2>
         {
           !props.loading ?
             <>
               <ul>
                 {
-                  props.filteredList.map(toDo => {
+                  filteredList.length > 0 ? filteredList.map(toDo => {
                     return (
                       <li key={toDo.id}>
                         <ToDo
@@ -33,6 +36,8 @@ const ToDoList = (props) => {
                       </li>
                     )
                   })
+                    :
+                    <NothingFound />
                 }
               </ul>
             </>
@@ -47,8 +52,7 @@ const ToDoList = (props) => {
 const mapStateToProps = (reducers) => (reducers.toDosProps)
 
 const mapDispatchToProps = {
-  fetchToDo,
-  filterAllToDos
+  fetchToDo
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToDoList);

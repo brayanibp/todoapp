@@ -1,0 +1,18 @@
+#NothingFound {
+  background-color: #ebecf022;
+  background-image: url("../../assets/svgs/nothing\ found.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  color: #66666688;
+}
+
+#NothingFound h2 {
+  color: #88888888;
+}

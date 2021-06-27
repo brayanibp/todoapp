@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { fetchToDo } from '../../actions/toDoActions';
 const LoadMoreToDos = (props) => {
   return (
-    <button id="fetchMoreToDos" onClick={() => props.fetchToDo(props.nextPage)}>Load More To Dos</button>
+    <button id="fetchMoreToDos" onClick={() => props.fetchToDo(props.activeFilter, props.lastFilter, props.nextPage, props.list)}>Load More To Dos</button>
   )
 }
 
