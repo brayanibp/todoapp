@@ -3,12 +3,13 @@ import { ADD_TODO, DELETE_TODO, FETCH_TODOS, FILTER_ALL_TODOS, FILTER_COMPLETED_
 
 export const addToDo = (toDoName) => async (dispatch) => {
   const newToDo = {
-    id: 4,
     name: toDoName,
     expire_at: null,
     completed: false
   };
-  dispatch({ type: ADD_TODO, payload: newToDo });
+  const res = await axios.post('http://localhost:8000/api/tasks/',newToDo);
+  dispatch({ type: ADD_TODO, payload: res.data.task });
+  dispatch({ type: FILTER_ALL_TODOS });
 }
 
 export const updateToDo = (toDo) => (dispatch) => {
@@ -38,6 +39,9 @@ export const fetchToDo = (activeFilter, lastFilter = "", nextPage, list = []) =>
   if(nextPage !== null && nextPage !== undefined) {
     dispatch({ type: TODOS_LOADING });
     try {
+      if (activeFilter === lastFilter && nextPage === "") {
+        lastFilter = ""
+      }
       if (activeFilter !== lastFilter) {
         const res = await axios.get(`http://localhost:8000/api/tasks/${activeFilter}?page=1`);
         const newList = res.data.data.filter(toDo=> ![...list].find(prev=>parseInt(prev.id)===parseInt(toDo.id)));
@@ -62,7 +66,8 @@ export const fetchToDo = (activeFilter, lastFilter = "", nextPage, list = []) =>
         }
         dispatch({ type: FETCH_TODOS, payload: toDos });
         return;
-      } else if (activeFilter === lastFilter) {
+      } else if (activeFilter === lastFilter && nextPage !== "") {
+        console.log(nextPage);
         const res = await axios.get(nextPage);
         let toDos
         if (res.data.data === undefined) {

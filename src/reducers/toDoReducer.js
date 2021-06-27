@@ -28,6 +28,7 @@ const toDoReducer = (state = initialState, action) => {
           ...newList
         ],
         filteredList: [
+          ...state.filteredList,
           ...newList
         ],
         currentPage: action.payload.currentPage,
