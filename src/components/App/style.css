@@ -8,8 +8,14 @@ body {
   text-decoration: none;
 }
 
+body {
+  background: url("../../assets/jpg/background.jpg");
+  background-size: cover;
+}
+
 .header {
   margin: 20px;
+  color: rgb(60, 60, 60);
 }
 
 #AppContainer {
