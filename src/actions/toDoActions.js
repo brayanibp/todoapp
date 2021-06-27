@@ -1,4 +1,5 @@
-import { ADD_TODO, DELETE_TODO, FETCH_TODOS, FILTER_ALL_TODOS, FILTER_COMPLETED_TODOS, FILTER_TODO_NAME, FILTER_UNCOMPLETED_TODOS, UPDATE_TODO } from "../types/toDoTypes"
+import axios from 'axios';
+import { ADD_TODO, DELETE_TODO, FETCH_TODOS, FILTER_ALL_TODOS, FILTER_COMPLETED_TODOS, FILTER_TODO_NAME, FILTER_UNCOMPLETED_TODOS, TODOS_LOADING, UPDATE_TODO } from "../types/toDoTypes"
 
 export const addToDo = (toDoName) => async (dispatch) => {
   const newToDo = {
@@ -34,26 +35,34 @@ export const filterToDoName = (arg) => (dispatch) => {
   dispatch({ type: FILTER_TODO_NAME, payload: arg });
 }
 
-export const fetchToDo = () => (dispatch) => {
-  const toDos = [
-    {
-      id: 1,
-      name: "Crear interfaz",
-      expire_at: null,
-      completed: false
-    },
-    {
-      id: 2,
-      name: "Crear API rest",
-      expire_at: null,
-      completed: false
-    },
-    {
-      id: 3,
-      name: "Entregar",
-      expire_at: null,
-      completed: false
-    }
-  ]
-  dispatch({ type: FETCH_TODOS, payload: toDos });
+export const fetchToDo = (page) => async (dispatch) => {
+  dispatch({ type: TODOS_LOADING });
+  try {
+    const res = await axios.get(`http://localhost:8000/api/tasks/all?page=${page}`);
+    const toDos = res.data.data;
+    console.log(toDos);
+    dispatch({ type: FETCH_TODOS, payload: toDos });
+  } catch (err) {
+    console.error(err.message);
+  }
+  // const toDos = [
+  //   {
+  //     id: 1,
+  //     name: "Crear interfaz",
+  //     expire_at: null,
+  //     completed: false
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Crear API rest",
+  //     expire_at: null,
+  //     completed: false
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Entregar",
+  //     expire_at: null,
+  //     completed: false
+  //   }
+  // ]
 }

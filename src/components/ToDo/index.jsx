@@ -2,8 +2,12 @@ import React from 'react';
 import './style.css';
 import { connect } from 'react-redux';
 import * as toDoActions from '../../actions/toDoActions';
+import { useEffect } from 'react';
 
 const ToDo = (props) => {
+  useEffect(() => {
+    loadAreaSize();
+  }, []);
   //UPDATE TO DO
   const updateToDo = () => {
     const toDoName = document.querySelector(`#toDo_${props.id}`);
@@ -88,7 +92,7 @@ const ToDo = (props) => {
     }
     updateToDo();
   }
-
+  console.log(new Date(new Date(String(props.expire_at).replace('-', '/')).getDate() + '/' + new Date(String(props.expire_at).replace('-', '/')).getMonth() + '/' + new Date(String(props.expire_at).replace('-', '/')).getFullYear()).toDateString());
   return (
     <div
       id={props.id}

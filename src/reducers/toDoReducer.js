@@ -1,18 +1,29 @@
-import { ADD_TODO, DELETE_TODO, UPDATE_TODO, FETCH_TODOS, FILTER_ALL_TODOS, FILTER_COMPLETED_TODOS, FILTER_UNCOMPLETED_TODOS, FILTER_TODO_NAME } from "../types/toDoTypes";
+import { ADD_TODO, DELETE_TODO, UPDATE_TODO, FETCH_TODOS, FILTER_ALL_TODOS, FILTER_COMPLETED_TODOS, FILTER_UNCOMPLETED_TODOS, FILTER_TODO_NAME, TODOS_LOADING } from "../types/toDoTypes";
 
 const initialState = {
   list: [],
   filteredList: [],
   loading: true,
+  currentPage: 0,
+  nextPage: 1
 }
 
 const toDoReducer = (state = initialState, action) => {
   switch (action.type) {
+    case TODOS_LOADING:
+      return {
+        ...state,
+        loading: true
+      }
     case FETCH_TODOS:
       return {
         ...state,
-        list: action.payload,
-        filteredList: action.payload,
+        list: [
+          ...state.list,
+          ...action.payload
+        ],
+        currentPage: state.currentPage++,
+        nextPage: state.nextPage++,
         loading: false
       }
 

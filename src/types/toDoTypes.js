@@ -6,3 +6,4 @@ export const FILTER_UNCOMPLETED_TODOS = "toDo/uncompletedToDos";
 export const FILTER_ALL_TODOS = "toDo/allToDos";
 export const FILTER_TODO_NAME = "toDo/filterToDoName";
 export const FETCH_TODOS = "toDo/fetch";
+export const TODOS_LOADING = "toDo/loading";

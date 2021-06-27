@@ -8,7 +8,8 @@ import Loader from '../Loader';
 const ToDoList = (props) => {
   useEffect(() => {
     if (!props.list.length) {
-      props.fetchToDo();
+      props.fetchToDo(props.nextPage);
+      props.filterAllToDos();
     }
   }, [props]);
   return (
