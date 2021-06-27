@@ -11,3 +11,7 @@ body {
 .header {
   margin: 20px;
 }
+
+#AppContainer {
+  display: flex;
+}

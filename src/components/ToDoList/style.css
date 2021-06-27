@@ -1,17 +1,61 @@
 #toDoList {
   width: 300px;
   background: #ebecf0;
-  height: max-content;
   margin: 20px;
   padding: 15px;
   border-radius: 10px;
   box-shadow: 3px 3px 3px #00000033;
   display: flex;
-  justify-content: center;
-  align-items: initial;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+#toDoList h2 {
+  width: calc(100% - 15px);
+  font-size: 24px;
+  margin: 10px 0 0 0;
+  color: rgba(84, 84, 84, 55);
+  padding-left: 15px;
 }
 
 #toDoList ul {
   list-style: none;
   padding: 5px;
+  max-height: 400px;
+  width: 100%;
+  border-radius: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#toDoList ul::-webkit-scrollbar {
+  width: 5px;
+  background: transparent;
+  position: absolute;
+  right: 0;
+  position: absolute;
+}
+#toDoList ul::-webkit-scrollbar-button {
+  display: none;
+}
+#toDoList ul::-webkit-scrollbar-thumb {
+  background: #00000022;
+  border-radius: 5px;
+}
+
+#fetchMoreToDos {
+  height: 50px;
+  width: 330px;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 18px;
+  color: #00000088;
+  box-shadow: 1.5px 1.5px 1.5px #00000033;
+  background: #ebecf0;
 }

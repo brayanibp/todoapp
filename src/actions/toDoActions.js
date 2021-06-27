@@ -37,32 +37,16 @@ export const filterToDoName = (arg) => (dispatch) => {
 
 export const fetchToDo = (page) => async (dispatch) => {
   dispatch({ type: TODOS_LOADING });
+  let toDos = {};
   try {
     const res = await axios.get(`http://localhost:8000/api/tasks/all?page=${page}`);
-    const toDos = res.data.data;
-    console.log(toDos);
+    toDos = {
+      list: [...res.data.data],
+      lastPage: res.data.last_page
+    }
+    console.log(res,toDos);
     dispatch({ type: FETCH_TODOS, payload: toDos });
   } catch (err) {
     console.error(err.message);
   }
-  // const toDos = [
-  //   {
-  //     id: 1,
-  //     name: "Crear interfaz",
-  //     expire_at: null,
-  //     completed: false
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Crear API rest",
-  //     expire_at: null,
-  //     completed: false
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Entregar",
-  //     expire_at: null,
-  //     completed: false
-  //   }
-  // ]
 }

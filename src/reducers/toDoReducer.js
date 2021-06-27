@@ -5,7 +5,8 @@ const initialState = {
   filteredList: [],
   loading: true,
   currentPage: 0,
-  nextPage: 1
+  nextPage: 1,
+  lastPage: 1
 }
 
 const toDoReducer = (state = initialState, action) => {
@@ -16,14 +17,25 @@ const toDoReducer = (state = initialState, action) => {
         loading: true
       }
     case FETCH_TODOS:
+      if (state.currentPage === state.lastPage) {
+        return {
+          ...state,
+          loading: false
+        }
+      }
       return {
         ...state,
         list: [
           ...state.list,
-          ...action.payload
+          ...action.payload.list
         ],
-        currentPage: state.currentPage++,
-        nextPage: state.nextPage++,
+        filteredList: [
+          ...state.list,
+          ...action.payload.list
+        ],
+        currentPage: state.nextPage,
+        nextPage: state.nextPage + 1,
+        lastPage: action.payload.lastPage,
         loading: false
       }
 
@@ -36,19 +48,19 @@ const toDoReducer = (state = initialState, action) => {
     case FILTER_COMPLETED_TODOS:
       return {
         ...state,
-        filteredList: state.list.filter(toDo=>toDo.completed === true)
+        filteredList: state.list.filter(toDo => Boolean(toDo.completed) === true)
       }
-    
+
     case FILTER_UNCOMPLETED_TODOS:
       return {
         ...state,
-        filteredList: state.list.filter(toDo=>toDo.completed === false)
+        filteredList: state.list.filter(toDo => Boolean(toDo.completed) === false)
       }
-    
+
     case FILTER_TODO_NAME:
       return {
         ...state,
-        filteredList: state.list.filter(toDo=>String(toDo.name).toLowerCase().includes(String(action.payload).toLowerCase()))
+        filteredList: state.list.filter(toDo => String(toDo.name).toLowerCase().includes(String(action.payload).toLowerCase()))
       }
 
     case ADD_TODO:
@@ -62,18 +74,18 @@ const toDoReducer = (state = initialState, action) => {
       }
 
     case UPDATE_TODO:
-      const toDo = { 
-        ...state.list.find(toDo=>toDo.id === action.payload.id),
+      const toDo = {
+        ...state.list.find(toDo => toDo.id === action.payload.id),
         ...action.payload,
       };
       const toDoList = [
-        ...state.list.filter(toDo=>toDo.id !== action.payload.id),
-        toDo, 
+        ...state.list.filter(toDo => toDo.id !== action.payload.id),
+        toDo,
       ];
       return {
         ...state,
         list: [
-          ...toDoList.sort((a,b)=>a.id-b.id)
+          ...toDoList.sort((a, b) => a.id - b.id)
         ]
       }
 
@@ -81,7 +93,7 @@ const toDoReducer = (state = initialState, action) => {
       return {
         ...state,
         list: [
-          ...state.list.filter(toDo=>parseInt(toDo.id)!==parseInt(action.payload))
+          ...state.list.filter(toDo => parseInt(toDo.id) !== parseInt(action.payload))
         ]
       }
 

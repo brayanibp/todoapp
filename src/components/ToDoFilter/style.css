@@ -5,6 +5,7 @@
   padding: 15px;
   border-radius: 10px;
   box-shadow: 3px 3px 3px #00000033;
+  height: max-content;
 }
 
 #toDoSearch input {

@@ -6,36 +6,41 @@ import { fetchToDo, filterAllToDos } from '../../actions/toDoActions';
 import Loader from '../Loader';
 
 const ToDoList = (props) => {
+  const { list, nextPage, fetchToDo } = props;
   useEffect(() => {
-    if (!props.list.length) {
-      props.fetchToDo(props.nextPage);
-      props.filterAllToDos();
+    if (list.length < 1) {
+      fetchToDo(nextPage);
     }
-  }, [props]);
+  }, [list, fetchToDo, nextPage]);
   return (
-    <div id="toDoList">
-      {
-        !props.loading ?
-          <ul>
-            {
-              props.filteredList.map(toDo => {
-                return (
-                  <li key={toDo.id}>
-                    <ToDo
-                      id={toDo.id}
-                      name={toDo.name}
-                      expire_at={toDo.expire_at}
-                      completed={toDo.completed}
-                    />
-                  </li>
-                )
-              }).reverse()
-            }
-          </ul>
-          :
-          <Loader />
-      }
-    </div>
+    <>
+      <div id="toDoList">
+        <h2>To Do List</h2>
+        {
+          !props.loading ?
+            <>
+              <ul>
+                {
+                  props.filteredList.map(toDo => {
+                    return (
+                      <li key={toDo.id}>
+                        <ToDo
+                          id={toDo.id}
+                          name={toDo.name}
+                          expire_at={toDo.expire_at}
+                          completed={toDo.completed}
+                        />
+                      </li>
+                    )
+                  })
+                }
+              </ul>
+            </>
+            :
+            <Loader />
+        }
+      </div>
+    </>
   );
 }
 

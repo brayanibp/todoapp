@@ -5,9 +5,6 @@ import * as toDoActions from '../../actions/toDoActions';
 import { useEffect } from 'react';
 
 const ToDo = (props) => {
-  useEffect(() => {
-    loadAreaSize();
-  }, []);
   //UPDATE TO DO
   const updateToDo = () => {
     const toDoName = document.querySelector(`#toDo_${props.id}`);
@@ -70,7 +67,7 @@ const ToDo = (props) => {
   }
 
   //CHECK BUTTON PRESSED
-  const handleCheck = (ev) => {
+  const handleCheck = () => {
     const checkbox = document.querySelector(`#toDoCheck_${props.id}`);
     const target = document.querySelector(`#toDoCheckButton_${props.id}`);
     checkbox.checked = !checkbox.checked;
@@ -79,9 +76,10 @@ const ToDo = (props) => {
   }
 
   //DATEPICKED DATA CHANGED
-  const handleDatePick = (ev) => {
-    const datepicker = ev.target;
-    const datepickerDate = new Date(String(ev.target.value).replace('-', '/')).getTime()
+  const handleDatePick = () => {
+    const datepicker = document.querySelector(`#toDoDate_${props.id}`);
+    if (!datepicker.value) return;
+    const datepickerDate = new Date(String(datepicker.value).replace('-', '/')).getTime();
     const currentDate = new Date();
     if (datepickerDate < currentDate) {
       datepicker.classList.remove('ontime');
@@ -92,7 +90,18 @@ const ToDo = (props) => {
     }
     updateToDo();
   }
-  console.log(new Date(new Date(String(props.expire_at).replace('-', '/')).getDate() + '/' + new Date(String(props.expire_at).replace('-', '/')).getMonth() + '/' + new Date(String(props.expire_at).replace('-', '/')).getFullYear()).toDateString());
+  useEffect(() => {
+    const handleDateLoad = () => {
+      // DATE LOAD
+      const datepicker = document.querySelector(`#toDoDate_${props.id}`);
+      if (!datepicker.value) return;
+      const datepickerDate = new Date(String(datepicker.value).replace('-', '/')).getTime();
+      const currentDate = new Date();
+      datepickerDate < currentDate ? datepicker.classList.add('expired') : datepicker.classList.add('ontime');
+    }
+    loadAreaSize();
+    handleDateLoad();
+  }, [props.id]);
   return (
     <div
       id={props.id}
@@ -110,18 +119,18 @@ const ToDo = (props) => {
         type="date"
         id={`toDoDate_${props.id}`}
         className="toDo__date"
-        defaultValue={props.expire_at}
+        defaultValue={String(props.expire_at).replace('00:00:00', '').trim()}
         onChange={handleDatePick}
       />
       <input
         type="checkbox"
         hidden
         id={`toDoCheck_${props.id}`}
-        defaultChecked={props.completed}
+        defaultChecked={Boolean(props.completed)}
       />
       <button
         id={`toDoCheckButton_${props.id}`}
-        className={props.completed ? "toDo__completed checked" : "toDo__completed"}
+        className={Boolean(props.completed) ? "toDo__completed checked" : "toDo__completed"}
         onClick={handleCheck}
       ></button>
       <button
