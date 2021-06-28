@@ -1,4 +1,4 @@
-import { ADD_TODO, DELETE_TODO, UPDATE_TODO, FETCH_TODOS, FILTER_ALL_TODOS, FILTER_COMPLETED_TODOS, FILTER_UNCOMPLETED_TODOS, FILTER_TODO_NAME, TODOS_LOADING } from "../types/toDoTypes";
+import { ADD_TODO, DELETE_TODO, UPDATE_TODO, FETCH_TODOS, FILTER_ALL_TODOS, FILTER_COMPLETED_TODOS, FILTER_UNCOMPLETED_TODOS, FILTER_TODO_NAME, TODOS_LOADING, TODOS_ERROR } from "../types/toDoTypes";
 
 const initialState = {
   list: [],
@@ -8,7 +8,8 @@ const initialState = {
   nextPage: "",
   lastPage: 1,
   activeFilter: "all",
-  lastFilter: ""
+  lastFilter: "",
+  error: null
 }
 
 const toDoReducer = (state = initialState, action) => {
@@ -110,7 +111,17 @@ const toDoReducer = (state = initialState, action) => {
         ...state,
         list: [
           ...state.list.filter(toDo => parseInt(toDo.id) !== parseInt(action.payload))
+        ],
+        filteredList: [
+          ...state.filteredList.filter(toDo => parseInt(toDo.id) !== parseInt(action.payload))
         ]
+      }
+
+    case TODOS_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false
       }
 
     default:

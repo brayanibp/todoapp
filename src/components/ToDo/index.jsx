@@ -66,22 +66,15 @@ const ToDo = (props) => {
     props.filterAllToDos();
   }
 
-  //CHECK BUTTON PRESSED
-  const handleCheck = () => {
-    const checkbox = document.querySelector(`#toDoCheck_${props.id}`);
-    const target = document.querySelector(`#toDoCheckButton_${props.id}`);
-    checkbox.checked = !checkbox.checked;
-    target.classList.toggle("checked");
-    updateToDo();
-  }
-
   //DATEPICKED DATA CHANGED
   const handleDatePick = () => {
     const datepicker = document.querySelector(`#toDoDate_${props.id}`);
     if (!datepicker.value) return;
     const datepickerDate = new Date(String(datepicker.value).replace('-', '/')).getTime();
     const currentDate = new Date();
-    if (datepickerDate < currentDate) {
+    // TAKING completed prop from store because actual props for the ToDo component comes from iteration in ToDoList component
+    const completed = Boolean(props.list.find(toDo => parseInt(toDo.id) === parseInt(props.id)).completed);
+    if (datepickerDate < currentDate && completed) {
       datepicker.classList.remove('ontime');
       datepicker.classList.add('expired');
     } else {
@@ -90,6 +83,19 @@ const ToDo = (props) => {
     }
     updateToDo();
   }
+
+  //CHECK BUTTON PRESSED
+  const handleCheck = () => {
+    const checkbox = document.querySelector(`#toDoCheck_${props.id}`);
+    const target = document.querySelector(`#toDoCheckButton_${props.id}`);
+    checkbox.checked = !checkbox.checked;
+    target.classList.toggle("checked");
+    if (Boolean(props.expire_at)) {
+      handleDatePick();
+    }
+    updateToDo();
+  }
+
   useEffect(() => {
     const handleDateLoad = () => {
       // DATE LOAD
@@ -97,11 +103,11 @@ const ToDo = (props) => {
       if (!datepicker.value) return;
       const datepickerDate = new Date(String(datepicker.value).replace('-', '/')).getTime();
       const currentDate = new Date();
-      datepickerDate < currentDate ? datepicker.classList.add('expired') : datepicker.classList.add('ontime');
+      datepickerDate < currentDate && !Boolean(props.completed) ? datepicker.classList.add('expired') : datepicker.classList.add('ontime');
     }
-    loadAreaSize();
     handleDateLoad();
-  }, [props.id]);
+    loadAreaSize();
+  }, [props.id, props.completed]);
   return (
     <div
       id={props.id}
