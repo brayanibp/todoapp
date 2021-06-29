@@ -51,11 +51,13 @@ Which will create a new folder in the place you downloaded the ToDoApp
 
 Now we move on to `./todoapp` folder with the command `cd todoapp` and once inside the project directory, you can run: 
 
-### `npm i` or `npm install`
+`npm i` or `npm install`
 
 This command will install all project required dependencies to run
 
-### `npm start`
+And later you can start the project with:
+
+`npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
