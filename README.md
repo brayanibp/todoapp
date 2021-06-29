@@ -49,7 +49,11 @@ Which will create a new folder in the place you downloaded the ToDoApp
 
 ## How to start the program
 
-Now we move on to `./todoapp` folder with the command `cd todoapp` and once inside the project directory, you can run:
+Now we move on to `./todoapp` folder with the command `cd todoapp` and once inside the project directory, you can run: 
+
+### `npm i` or `npm install`
+
+This command will install all project required dependencies to run
 
 ### `npm start`
 
