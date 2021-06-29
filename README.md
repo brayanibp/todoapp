@@ -37,9 +37,19 @@ Running either of the above commands downloads a script and runs it. The script 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 ```
 
+## After install dependencies
+
+After install dependendicies we are ready to download the project with the command below.
+
+```
+  git clone https://github.com/brayanibp/todoapp.git
+```
+
+Which will create a new folder in the place you downloaded the ToDoApp
+
 ## How to start the program
 
-Inside the project directory, you can run:
+Now we move on to `./todoapp` folder with the command `cd todoapp` and once inside the project directory, you can run:
 
 ### `npm start`
 
