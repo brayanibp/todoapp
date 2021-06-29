@@ -8,7 +8,7 @@ You will have to get installed Node.js in latest LTS version if you don't have i
 
 ### To install Node.js in Windows
 
-You will have to download the official installer from <a href="https://nodejs.org/es/download/" target="_blank">nodejs.org</a>
+You will have to download the official installer from [nodejs.org](https://nodejs.org/es/download/).
 
 ![](./doc/NodeJsWin.png)
 
