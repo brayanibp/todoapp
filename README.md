@@ -6,13 +6,21 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 You will have to get installed Node.js in latest LTS version if you don't have it
 
-### To install Node.js in Windows
+### To install Node.js on Windows
 
 You will have to download the official installer from [nodejs.org](https://nodejs.org/es/download/).
 
 ![](./doc/NodeJsWin.png)
 
 Once you downloaded just have to install like any other program.
+
+### To install Node.js on Linux
+
+To install Node.js on Linux I prefer to use NVM (Node Version Manager) so you can follow the instructions below or just go to official [nvm repo](https://github.com/nvm-sh/nvm#installing-and-updating)
+
+```
+  wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+```
 
 ## How to start the program
 
