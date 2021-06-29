@@ -22,6 +22,8 @@ To install Node.js on Linux I prefer to use NVM (Node Version Manager) so you ca
   wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 ```
 
+Running either of the above commands downloads a script and runs it. The script clones the nvm repository to ~/.nvm, and attempts to add the source lines from the snippet below to the correct profile file (`~/.bash_profile`, ~/.zshrc, ~/.profile, or ~/.bashrc).
+
 ## How to start the program
 
 Inside the project directory, you can run:
